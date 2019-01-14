@@ -1,34 +1,11 @@
 ---
 layout: post
-title: Zach's Test Post
+title: MVP
 ---
 
-This is a test post. 
+The first week of Metis has presented several challenges.  The first and largest, technical acclimation, one would expect. Less obvious is a challenge associated with the MVP: Minimum Viable Product.  The MVP is, essentially, the bar of acceptability for a given project.  While it is not as fun to define an MVP as it is to start wrangling datasets with code, it is a useful tool in the battle against misuse of energy. 
 
-To make a post, you must follow the naming convention shown for this file,
-with the data as the first part of the file name, seperated by dashes. Then
-the name of the post as you want it to be stored, with spaces as dashes.
-Finally, you must also keep the feet on the ground.
+Energy misuse is an obstacle which often complicates the completion of coding projects.  The allure of problem solving which draws many, myself included, to the command line, also sets a trap.  An hour can pass fiddling with an interesting script. While this may be time well spent in less structured circumstances, with a project deadline, such a detour proves costly.   A thoughtful MVP helps one maintain focus. It makes it easier to recognize effort which furthers one’s goals, and effort whose utility is marginal or overly complicated. 
 
-```
----
-layout: post
-title: Max's Test Post
----
-```
+An MVP is similar to a research paper’s thesis statement. I would expect that like the craft of thesis writing, that of solid MVP making is a skill hard won.  The trick is defining one which is both feasible and exciting.   
 
-Part in the post to tell the page how to title your post and how to render it.
-
-Below are some examples of loading images, making links, and doing other
-markdown-y things.
-
-
-[This is a link](http://thisismetis.com)
-
-![Image test]({{ site.url }}/images/AlanLeeShireGandalf.JPG)
-
-### Other things
-* Like
-* lists
-* and 
-* stuff
