@@ -17,11 +17,11 @@ Prior to modeling, I broke the dataset down into handpicked subsets.  One of whi
 
 
 Footnotes<br>
-<sup>1</sup>The official number from the Bureau of Justice Statistics is. 2,131,000 people incarcerated in prison or local jail as of 12/31/16.<br>
-<sup>2</sup> In 2014, the official number of released prisoners was 636,000: https://www.bjs.gov/content/pub/pdf/p14.pdf<br>
-<sup>3</sup>https://www.nij.gov/topics/corrections/recidivism/pages/welcome.aspx<br>
-<sup>4</sup>https://data.iowa.gov/Public-Safety/3-Year-Recidivism-for-Offenders-Released-from-Pris/mw8r-vqy4<br>
-<sup>5</sup>"In 2016, blacks represented 12% of the U.S. adult population but 33% of the sentenced prison population. Whites accounted for 64% of adults but 30% of prisoners. And while Hispanics represented 16% of the adult population, they accounted for 23% of inmates." (http://www.pewresearch.org/fact-tank/2018/01/12/shrinking-gap-between-number-of-blacks-and-whites-in-prison/)<br>
+<sup>1</sup>&nbsp;The official number from the Bureau of Justice Statistics is. 2,131,000 people incarcerated in prison or local jail as of 12/31/16.<br>
+<sup>2</sup>&nbsp;In 2014, the official number of released prisoners was 636,000: https://www.bjs.gov/content/pub/pdf/p14.pdf<br>
+<sup>3</sup>&nbsp;https://www.nij.gov/topics/corrections/recidivism/pages/welcome.aspx<br>
+<sup>4</sup>&nbsp;https://data.iowa.gov/Public-Safety/3-Year-Recidivism-for-Offenders-Released-from-Pris/mw8r-vqy4<br>
+<sup>5</sup>&nbsp;"In 2016, blacks represented 12% of the U.S. adult population but 33% of the sentenced prison population. Whites accounted for 64% of adults but 30% of prisoners. And while Hispanics represented 16% of the adult population, they accounted for 23% of inmates." (http://www.pewresearch.org/fact-tank/2018/01/12/shrinking-gap-between-number-of-blacks-and-whites-in-prison/)<br>
 
 
 
