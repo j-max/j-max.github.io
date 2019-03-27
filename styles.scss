@@ -27,3 +27,25 @@
 @import "posts";
 @import "pagination";
 @import "message";
+
+.parallax {
+	background-image: url("/images/3-27-19/book.jpg");
+
+	height: 100px;
+
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.magical {
+	background-image: url("/images/3-27-19/magical.jpg");
+
+	height: 100px;
+
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
