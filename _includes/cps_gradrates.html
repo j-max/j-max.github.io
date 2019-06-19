@@ -1,0 +1,366 @@
+
+<style>
+
+#test {
+	width: 100%;
+	font: 10px sans-serif;
+}
+
+.xaxis_button {
+	width: 12%;
+	margin: 5px;
+	
+	float: left;
+ font: 20px sans-serif;
+ border-radius: 5px;
+ text-align: center;
+ 
+}
+#option {
+		display: inline-block;
+		width: 100%;
+}
+#low_income {
+		background: pink
+}
+
+#total_students {
+		background: aqua
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+</style>
+
+<div id = "option">
+	<div id="low_income" class = "xaxis_button">Low Income</div>
+	<div id="total_students" class = "xaxis_button">Total Student</div>
+</div>
+<div id='test'></div>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script  type="text/javascript">
+
+//dataset columns: school_id, school_name, grad_rate, total_students, low_inc_percentage
+
+var padding = 30;
+var w = 600;
+var h = 400;
+//x is student population, y is graduation rate
+
+
+	var svg = d3.select("#test")
+							.append("svg")
+							.attr("height", h)
+							.attr("width", w);
+
+	dataset =  [['400105', 'URBAN PREP - BRONZEVILLE HS', 83.1, 337.0], ['609676', 'DUNBAR HS', 62.5, 322.0], ['400087', 'YOUNG WOMENS HS', 67.6, 160.0], ['609764', 'JUAREZ HS', 78.6, 1706.0], ['400104', 'INSTITUTO - HEALTH', 85.0, 745.0], ['609748', 'YORK HS', 2.3, 184.0], ['400057', 'NOBLE - UIC HS', 92.4, 931.0], ['609750', 'SIMPSON HS', 23.1, 34.0], ['400102', 'URBAN PREP - WEST HS', 57.3, 176.0], ['400091', 'CHICAGO TECH HS', 77.0, 269.0], ['400054', 'NOBLE - PRITZKER HS', 91.3, 975.0], ['609691', 'NORTH-GRAND HS', 79.3, 992.0], ['609716', 'KELVYN PARK HS', 65.7, 405.0], ['609679', 'PROSSER HS', 87.6, 1329.0], ['609726', 'BROOKS HS', 90.4, 989.0], ['609705', 'FENGER HS', 57.7, 208.0], ['609761', 'CORLISS HS', 64.3, 275.0], ['609710', 'HARLAN HS', 57.4, 329.0], ['400094', 'EPIC HS', 74.3, 543.0], ['609739', 'WASHINGTON HS', 81.4, 1440.0], ['609674', 'CHICAGO VOCATIONAL HS', 76.8, 888.0], ['610323', 'BOWEN HS', 61.9, 253.0], ['610547', 'SOUTH SHORE INTL HS', 86.5, 655.0], ['609755', 'YOUNG HS', 96.1, 2211.0], ['400036', 'CHICAGO VIRTUAL', 60.0, 671.0], ['609756', 'CURIE HS', 78.7, 2912.0], ['400085', 'ACERO - GARCIA HS', 89.2, 625.0], ['609715', 'KELLY HS', 79.2, 1901.0], ['610543', 'SOLORIO HS', 82.7, 1196.0], ['610518', 'AUSTIN CCA HS', 77.3, 214.0], ['610245', 'DOUGLASS HS', 60.9, 63.0], ['610244', 'CLARK HS', 82.1, 522.0], ['400077', 'U OF C - WOODLAWN HS', 73.1, 623.0], ['609713', 'HYDE PARK HS', 57.0, 760.0], ['400056', 'NOBLE - ROWE CLARK HS', 78.6, 404.0], ['610394', 'UPLIFT HS', 58.4, 159.0], ['400058', 'NORTH LAWNDALE - CHRISTIANA HS', 75.9, 367.0], ['609704', 'FARRAGUT HS', 62.6, 672.0], ['610385', 'MULTICULTURAL HS', 82.0, 220.0], ['610383', 'SOCIAL JUSTICE HS', 77.6, 304.0], ['610384', 'INFINITY HS', 91.6, 408.0], ['610392', 'WORLD LANGUAGE HS', 85.0, 355.0], ['610357', 'SPRY HS', 83.6, 126.0], ['610499', 'COLLINS HS', 61.0, 222.0], ['400059', 'NORTH LAWNDALE - COLLINS HS', 75.7, 366.0], ['609692', 'SIMEON HS', 85.2, 1341.0], ['400062', 'PERSPECTIVES - TECH HS', 80.6, 315.0], ['400061', 'PERSPECTIVES - LEADERSHIP HS', 80.3, 404.0], ['400032', 'CICS - ELLISON HS', 77.8, 348.0], ['610529', 'OGDEN HS', 93.9, 596.0], ['400055', 'NOBLE - RAUNER HS', 83.8, 619.0], ['400051', 'NOBLE - NOBLE HS', 94.1, 668.0], ['400053', 'NOBLE - GOLDER HS', 86.2, 667.0], ['610340', 'CHICAGO ACADEMY HS', 87.1, 560.0], ['609732', 'STEINMETZ HS', 73.9, 1232.0], ['609722', 'MANLEY HS', 43.3, 83.0], ['609783', 'JEFFERSON HS', 0.8, 190.0], ['400097', 'NOBLE - BULLS HS', 81.9, 1161.0], ['610304', 'PHOENIX MILITARY HS', 92.9, 545.0], ['609744', 'NORTHSIDE LEARNING HS', 0.0, 220.0], ['609724', 'MATHER HS', 78.5, 1484.0], ['400034', 'CICS - NORTHTOWN HS', 84.4, 918.0], ['609738', 'LINCOLN PARK HS', 90.9, 2105.0], ['609746', 'KENWOOD HS', 86.3, 1862.0], ['610381', 'BRONZEVILLE HS', 75.9, 217.0], ['610380', 'WILLIAMS HS', 87.3, 179.0], ['609712', 'HIRSCH HS', 40.0, 103.0], ['400052', 'NOBLE - COMER', 85.4, 1181.0], ['609734', 'TAFT HS', 87.2, 3414.0], ['400033', 'CICS - LONGWOOD', 73.3, 1281.0], ['609762', 'JULIAN HS', 71.3, 452.0], ['609725', 'MORGAN PARK HS', 82.6, 1238.0], ['610513', 'AIR FORCE HS', 86.7, 197.0], ['609735', 'TILDEN HS', 55.2, 219.0], ['609682', 'RICHARDS HS', 59.5, 226.0], ['400106', 'NOBLE - JOHNSON HS', 77.7, 762.0], ['400086', 'URBAN PREP - ENGLEWOOD HS', 78.7, 259.0], ['610506', 'TEAM HS', 75.9, 1.0], ['609768', 'HOPE HS', 61.9, 22.0], ['609708', 'FOREMAN HS', 64.7, 749.0], ['609729', 'SCHURZ HS', 74.3, 1618.0], ['609766', 'VAUGHN HS', 20.6, 228.0], ['609698', 'BOGAN HS', 71.4, 847.0], ['610524', 'ALCOTT HS', 81.3, 316.0], ['609720', 'LANE TECH HS', 95.5, 4514.0], ['400013', 'ASPIRA - EARLY COLLEGE HS', 79.2, 340.0], ['609694', 'HANCOCK HS', 86.2, 1011.0], ['609741', 'HUBBARD HS', 82.9, 1705.0], ['609709', 'GAGE PARK HS', 62.8, 346.0], ['609728', 'ROOSEVELT HS', 69.7, 954.0], ['609737', 'VON STEUBEN HS', 91.1, 1770.0], ['609749', 'NORTHSIDE PREP HS', 96.6, 1091.0], ['609695', 'AMUNDSEN HS', 76.0, 1285.0], ['400066', 'PERSPECTIVES - MATH & SCI HS', 75.7, 495.0], ['609754', 'CHICAGO MILITARY HS', 89.6, 298.0], ['609727', 'PHILLIPS HS', 63.0, 768.0], ['609751', 'KING HS', 88.5, 513.0], ['400098', 'NOBLE - MUCHIN HS', 94.8, 973.0], ['609733', 'SULLIVAN HS', 66.1, 666.0], ['400035', 'CHICAGO MATH & SCIENCE HS', 85.9, 604.0], ['609740', 'WELLS HS', 75.7, 362.0], ['609759', 'CLEMENTE HS', 81.5, 704.0], ['400022', 'CHIARTS HS', 84.6, 612.0], ['609730', 'SENN HS', 85.8, 1415.0], ['610390', 'RICKOVER MILITARY HS', 88.3, 458.0], ['610389', 'ORR HS', 46.4, 225.0], ['609723', 'MARSHALL HS', 46.1, 265.0], ['610334', 'RABY HS', 67.5, 343.0], ['609693', 'WESTINGHOUSE HS', 93.3, 1203.0], ['609718', 'KENNEDY HS', 73.8, 1600.0], ['610391', 'LINDBLOM HS', 89.3, 1364.0], ['609711', 'HARPER HS', 55.9, 87.0], ['609753', 'CHICAGO AGRICULTURE HS', 83.9, 767.0], ['609760', 'CARVER MILITARY HS', 89.9, 482.0], ['609680', 'PAYTON HS', 98.5, 1153.0], ['609678', 'JONES HS', 98.1, 1918.0], ['609719', 'LAKE VIEW HS', 88.2, 1385.0]]
+	
+	var xScale = d3.scaleLinear()
+								.domain([0, d3.max(dataset, function(d){
+																		return d[3]; })])
+									.range([padding, w-padding*2]);
+
+	var yScale = d3.scaleLinear()
+				 .domain([0, d3.max(dataset, function(d) {
+															return d[2]; })]) 
+							 .range([h-padding, padding+20]);
+
+//create x and y axis
+
+	var xAxis = d3.axisBottom()
+							.scale(xScale);
+
+	var yAxis = d3.axisLeft()
+								.scale(yScale);
+
+	// div for tooltip
+	var div = d3.select("body").append("div")
+							.attr("class", "tooltip")
+							.style("opacity", 0);
+
+	
+	
+	svg.selectAll("circle")
+			.data(dataset)
+			.enter()
+			.append("circle")
+			.attr("cx", function(d) {
+			// three added because the data point with 1 student appeared to be left of the y axis.
+			//the data point needs to be removed
+									return xScale(d[3])+3;})
+			.attr("cy", function(d) {
+									return yScale(d[2]);})
+			.attr("r", 3)
+			.on("mouseover", function(d) {
+					div.transition()
+							.duration(200)
+							.style("opacity", .9);
+					div.html("x_value: " + d[3]+
+											"<br/>" + "Graduation Rate: " + d[2]+
+											"<br/>" + "School: " + d[1]);
+			})
+			.on("mouseout", function (d) {
+					div.transition()
+					.duration(500)
+					.style("opacity", 0);
+			});
+
+
+//	Add axis labels
+	 svg.append("text")
+	 		.attr("class", "x label")
+	 		.attr("text-anchor", "end")
+	 		.attr("x", w/2+50)
+	 		.attr("y", h-2)
+	 		.text("Total Student Population");
+	
+  // text label for the y axis
+  svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0-2)
+      .attr("x",0 - (h / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Graduation Rate");      
+	
+	 svg.append("text")
+	 		.attr("class", "title")
+	 		.attr("text-anchor", "end")
+	 		.attr("x", w/2 + 120)
+	 		.attr("y", padding + 0)
+	 		.text("2017/18 CPS High School Graduation Rates vs. Total Student Population");
+
+	svg.append("g")
+			.attr("class", "y axis")
+			.attr("transform", "translate("+padding +",0)")
+			.call(yAxis);
+
+	svg.append("g")
+			.attr("class", "x axis")
+			.attr("transform", "translate(0," +(h-padding) + ")")
+			.call(xAxis);
+
+d3.select("#low_income")
+	.on("click", function() {
+//			svg.selectAll("circle").remove();
+//		svg.select('.xAxis').remove()
+//create x and y axis
+	dataset = [['400105', 'URBAN PREP - BRONZEVILLE HS', 83.1, 0.635014836795252] ,
+['609676', 'DUNBAR HS', 62.5, 0.708074534161491] ,
+['400087', 'YOUNG WOMENS HS', 67.6, 0.6] ,
+['609764', 'JUAREZ HS', 78.6, 0.626025791324736] ,
+['400104', 'INSTITUTO - HEALTH', 85.0, 0.930201342281879] ,
+['609748', 'YORK HS', 2.3, 0.967391304347826] ,
+['400057', 'NOBLE - UIC HS', 92.4, 0.839957035445757] ,
+['609750', 'SIMPSON HS', 23.1, 0.735294117647059] ,
+['400102', 'URBAN PREP - WEST HS', 57.3, 0.511363636363636] ,
+['400091', 'CHICAGO TECH HS', 77.0, 0.676579925650558] ,
+['400054', 'NOBLE - PRITZKER HS', 91.3, 0.953846153846154] ,
+['609691', 'NORTH-GRAND HS', 79.3, 0.748991935483871] ,
+['609716', 'KELVYN PARK HS', 65.7, 0.669135802469136] ,
+['609679', 'PROSSER HS', 87.6, 0.693002257336343] ,
+['609726', 'BROOKS HS', 90.4, 0.614762386248736] ,
+['609705', 'FENGER HS', 57.7, 0.836538461538462] ,
+['609761', 'CORLISS HS', 64.3, 0.752727272727273] ,
+['609710', 'HARLAN HS', 57.4, 0.930091185410334] ,
+['400094', 'EPIC HS', 74.3, 0.655616942909761] ,
+['609739', 'WASHINGTON HS', 81.4, 0.701388888888889] ,
+['609674', 'CHICAGO VOCATIONAL HS', 76.8, 0.755630630630631] ,
+['610323', 'BOWEN HS', 61.9, 0.636363636363636] ,
+['610547', 'SOUTH SHORE INTL HS', 86.5, 0.774045801526718] ,
+['609755', 'YOUNG HS', 96.1, 0.368159203980099] ,
+['400036', 'CHICAGO VIRTUAL', 60.0, 0.599105812220566] ,
+['609756', 'CURIE HS', 78.7, 0.770604395604396] ,
+['400085', 'ACERO - GARCIA HS', 89.2, 0.5104] ,
+['609715', 'KELLY HS', 79.2, 0.798001052077854] ,
+['610543', 'SOLORIO HS', 82.7, 0.756688963210702] ,
+['610518', 'AUSTIN CCA HS', 77.3, 0.747663551401869] ,
+['610245', 'DOUGLASS HS', 60.9, 0.698412698412698] ,
+['610244', 'CLARK HS', 82.1, 0.710727969348659] ,
+['400077', 'U OF C - WOODLAWN HS', 73.1, 0.590690208667737] ,
+['609713', 'HYDE PARK HS', 57.0, 0.717105263157895] ,
+['400056', 'NOBLE - ROWE CLARK HS', 78.6, 0.948019801980198] ,
+['610394', 'UPLIFT HS', 58.4, 0.811320754716981] ,
+['400058', 'NORTH LAWNDALE - CHRISTIANA HS', 75.9, 0.959128065395095] ,
+['609704', 'FARRAGUT HS', 62.6, 0.84375] ,
+['610385', 'MULTICULTURAL HS', 82.0, 0.945454545454545] ,
+['610383', 'SOCIAL JUSTICE HS', 77.6, 0.855263157894737] ,
+['610384', 'INFINITY HS', 91.6, 0.958333333333333] ,
+['610392', 'WORLD LANGUAGE HS', 85.0, 0.938028169014084] ,
+['610357', 'SPRY HS', 83.6, 0.761904761904762] ,
+['610499', 'COLLINS HS', 61.0, 0.918918918918919] ,
+['400059', 'NORTH LAWNDALE - COLLINS HS', 75.7, 0.781420765027322] ,
+['609692', 'SIMEON HS', 85.2, 0.847874720357942] ,
+['400062', 'PERSPECTIVES - TECH HS', 80.6, 0.828571428571429] ,
+['400061', 'PERSPECTIVES - LEADERSHIP HS', 80.3, 0.853960396039604] ,
+['400032', 'CICS - ELLISON HS', 77.8, 0.85632183908046] ,
+['610529', 'OGDEN HS', 93.9, 0.473154362416107] ,
+['400055', 'NOBLE - RAUNER HS', 83.8, 0.820678513731826] ,
+['400051', 'NOBLE - NOBLE HS', 94.1, 0.82185628742515] ,
+['400053', 'NOBLE - GOLDER HS', 86.2, 0.892053973013493] ,
+['610340', 'CHICAGO ACADEMY HS', 87.1, 0.541071428571429] ,
+['609732', 'STEINMETZ HS', 73.9, 0.51461038961039] ,
+['609722', 'MANLEY HS', 43.3, 0.795180722891566] ,
+['609783', 'JEFFERSON HS', 0.8, 0.457894736842105] ,
+['400097', 'NOBLE - BULLS HS', 81.9, 0.882859603789836] ,
+['610304', 'PHOENIX MILITARY HS', 92.9, 0.878899082568807] ,
+['609744', 'NORTHSIDE LEARNING HS', 0.0, 0.65] ,
+['609724', 'MATHER HS', 78.5, 0.526954177897574] ,
+['400034', 'CICS - NORTHTOWN HS', 84.4, 0.735294117647059] ,
+['609738', 'LINCOLN PARK HS', 90.9, 0.320190023752969] ,
+['609746', 'KENWOOD HS', 86.3, 0.495703544575725] ,
+['610381', 'BRONZEVILLE HS', 75.9, 0.695852534562212] ,
+['610380', 'WILLIAMS HS', 87.3, 0.82122905027933] ,
+['609712', 'HIRSCH HS', 40.0, 0.970873786407767] ,
+['400052', 'NOBLE - COMER', 85.4, 0.825571549534293] ,
+['609734', 'TAFT HS', 87.2, 0.394844756883421] ,
+['400033', 'CICS - LONGWOOD', 73.3, 0.819672131147541] ,
+['609762', 'JULIAN HS', 71.3, 0.734513274336283] ,
+['609725', 'MORGAN PARK HS', 82.6, 0.72859450726979] ,
+['610513', 'AIR FORCE HS', 86.7, 0.746192893401015] ,
+['609735', 'TILDEN HS', 55.2, 0.812785388127854] ,
+['609682', 'RICHARDS HS', 59.5, 0.920353982300885] ,
+['400106', 'NOBLE - JOHNSON HS', 77.7, 0.854330708661417] ,
+['400086', 'URBAN PREP - ENGLEWOOD HS', 78.7, 0.498069498069498] ,
+['610506', 'TEAM HS', 75.9, 1.0] ,
+['609768', 'HOPE HS', 61.9, 0.818181818181818] ,
+['609708', 'FOREMAN HS', 64.7, 0.690253671562083] ,
+['609729', 'SCHURZ HS', 74.3, 0.779975278121137] ,
+['609766', 'VAUGHN HS', 20.6, 0.706140350877193] ,
+['609698', 'BOGAN HS', 71.4, 0.756788665879575] ,
+['610524', 'ALCOTT HS', 81.3, 0.661392405063291] ,
+['609720', 'LANE TECH HS', 95.5, 0.400088613203367] ,
+['400013', 'ASPIRA - EARLY COLLEGE HS', 79.2, 0.929411764705882] ,
+['609694', 'HANCOCK HS', 86.2, 0.694362017804154] ,
+['609741', 'HUBBARD HS', 82.9, 0.858064516129032] ,
+['609709', 'GAGE PARK HS', 62.8, 0.673410404624277] ,
+['609728', 'ROOSEVELT HS', 69.7, 0.748427672955975] ,
+['609737', 'VON STEUBEN HS', 91.1, 0.646892655367232] ,
+['609749', 'NORTHSIDE PREP HS', 96.6, 0.3987167736022] ,
+['609695', 'AMUNDSEN HS', 76.0, 0.746303501945525] ,
+['400066', 'PERSPECTIVES - MATH & SCI HS', 75.7, 0.694949494949495] ,
+['609754', 'CHICAGO MILITARY HS', 89.6, 0.661073825503356] ,
+['609727', 'PHILLIPS HS', 63.0, 0.670572916666667] ,
+['609751', 'KING HS', 88.5, 0.666666666666667] ,
+['400098', 'NOBLE - MUCHIN HS', 94.8, 0.841726618705036] ,
+['609733', 'SULLIVAN HS', 66.1, 0.533033033033033] ,
+['400035', 'CHICAGO MATH & SCIENCE HS', 85.9, 0.653973509933775] ,
+['609740', 'WELLS HS', 75.7, 0.798342541436464] ,
+['609759', 'CLEMENTE HS', 81.5, 0.728693181818182] ,
+['400022', 'CHIARTS HS', 84.6, 0.315359477124183] ,
+['609730', 'SENN HS', 85.8, 0.652296819787986] ,
+['610390', 'RICKOVER MILITARY HS', 88.3, 0.534934497816594] ,
+['610389', 'ORR HS', 46.4, 0.857777777777778] ,
+['609723', 'MARSHALL HS', 46.1, 0.8] ,
+['610334', 'RABY HS', 67.5, 0.860058309037901] ,
+['609693', 'WESTINGHOUSE HS', 93.3, 0.669160432252702] ,
+['609718', 'KENNEDY HS', 73.8, 0.448125] ,
+['610391', 'LINDBLOM HS', 89.3, 0.626099706744868] ,
+['609711', 'HARPER HS', 55.9, 0.839080459770115] ,
+['609753', 'CHICAGO AGRICULTURE HS', 83.9, 0.23728813559322] ,
+['609760', 'CARVER MILITARY HS', 89.9, 0.807053941908714] ,
+['609680', 'PAYTON HS', 98.5, 0.280138768430182] ,
+['609678', 'JONES HS', 98.1, 0.371220020855057] ,
+['609719', 'LAKE VIEW HS', 88.2, 0.568953068592058]]
+	//only the xscal needs to be updated since the graduation rates remain constant.
+	xScale.domain([0, d3.max(dataset, function(d){	return d[3]; })]);
+	yScale.domain([0, d3.max(dataset, function(d){  return d[2]; })]); 
+
+
+		svg.selectAll("circle")
+			.data(dataset)
+			.transition()
+			.duration(1000)
+			.on("start", function() {
+					d3.select(this)
+						.attr("fill", "pink")
+						.attr("r", 3);
+			})
+			.attr("cx", function(d) {
+			// three added because the data point with 1 student appeared to be left of the y axis.
+			//the data point needs to be removed
+									return xScale(d[3])+3;})
+			.attr("cy", function(d) {
+									return yScale(d[2]);})
+			.on("end", function() {
+				d3.select(this)
+					.attr("fill", "black")
+					.attr("r", 3);
+			});
+		
+
+
+				 svg.select(".title")
+				   		.text("2017/18 CPS High School Graduation Rates vs. Low Income Student Percentage");
+
+					
+					svg.select(".y.axis")
+					 .transition()
+					 .duration(1000)
+								.call(yAxis);
+		
+					svg.select(".x.axis")
+					 .transition()
+					 .duration(1000)
+								.call(xAxis);
+
+				svg.select(".x.label")
+	 		.text("Low Income Student Percentage");
+
+			});
+
+d3.select("#total_students")
+	.on("click", function() {
+		dataset =  [['400105', 'URBAN PREP - BRONZEVILLE HS', 83.1, 337.0], ['609676', 'DUNBAR HS', 62.5, 322.0], ['400087', 'YOUNG WOMENS HS', 67.6, 160.0], ['609764', 'JUAREZ HS', 78.6, 1706.0], ['400104', 'INSTITUTO - HEALTH', 85.0, 745.0], ['609748', 'YORK HS', 2.3, 184.0], ['400057', 'NOBLE - UIC HS', 92.4, 931.0], ['609750', 'SIMPSON HS', 23.1, 34.0], ['400102', 'URBAN PREP - WEST HS', 57.3, 176.0], ['400091', 'CHICAGO TECH HS', 77.0, 269.0], ['400054', 'NOBLE - PRITZKER HS', 91.3, 975.0], ['609691', 'NORTH-GRAND HS', 79.3, 992.0], ['609716', 'KELVYN PARK HS', 65.7, 405.0], ['609679', 'PROSSER HS', 87.6, 1329.0], ['609726', 'BROOKS HS', 90.4, 989.0], ['609705', 'FENGER HS', 57.7, 208.0], ['609761', 'CORLISS HS', 64.3, 275.0], ['609710', 'HARLAN HS', 57.4, 329.0], ['400094', 'EPIC HS', 74.3, 543.0], ['609739', 'WASHINGTON HS', 81.4, 1440.0], ['609674', 'CHICAGO VOCATIONAL HS', 76.8, 888.0], ['610323', 'BOWEN HS', 61.9, 253.0], ['610547', 'SOUTH SHORE INTL HS', 86.5, 655.0], ['609755', 'YOUNG HS', 96.1, 2211.0], ['400036', 'CHICAGO VIRTUAL', 60.0, 671.0], ['609756', 'CURIE HS', 78.7, 2912.0], ['400085', 'ACERO - GARCIA HS', 89.2, 625.0], ['609715', 'KELLY HS', 79.2, 1901.0], ['610543', 'SOLORIO HS', 82.7, 1196.0], ['610518', 'AUSTIN CCA HS', 77.3, 214.0], ['610245', 'DOUGLASS HS', 60.9, 63.0], ['610244', 'CLARK HS', 82.1, 522.0], ['400077', 'U OF C - WOODLAWN HS', 73.1, 623.0], ['609713', 'HYDE PARK HS', 57.0, 760.0], ['400056', 'NOBLE - ROWE CLARK HS', 78.6, 404.0], ['610394', 'UPLIFT HS', 58.4, 159.0], ['400058', 'NORTH LAWNDALE - CHRISTIANA HS', 75.9, 367.0], ['609704', 'FARRAGUT HS', 62.6, 672.0], ['610385', 'MULTICULTURAL HS', 82.0, 220.0], ['610383', 'SOCIAL JUSTICE HS', 77.6, 304.0], ['610384', 'INFINITY HS', 91.6, 408.0], ['610392', 'WORLD LANGUAGE HS', 85.0, 355.0], ['610357', 'SPRY HS', 83.6, 126.0], ['610499', 'COLLINS HS', 61.0, 222.0], ['400059', 'NORTH LAWNDALE - COLLINS HS', 75.7, 366.0], ['609692', 'SIMEON HS', 85.2, 1341.0], ['400062', 'PERSPECTIVES - TECH HS', 80.6, 315.0], ['400061', 'PERSPECTIVES - LEADERSHIP HS', 80.3, 404.0], ['400032', 'CICS - ELLISON HS', 77.8, 348.0], ['610529', 'OGDEN HS', 93.9, 596.0], ['400055', 'NOBLE - RAUNER HS', 83.8, 619.0], ['400051', 'NOBLE - NOBLE HS', 94.1, 668.0], ['400053', 'NOBLE - GOLDER HS', 86.2, 667.0], ['610340', 'CHICAGO ACADEMY HS', 87.1, 560.0], ['609732', 'STEINMETZ HS', 73.9, 1232.0], ['609722', 'MANLEY HS', 43.3, 83.0], ['609783', 'JEFFERSON HS', 0.8, 190.0], ['400097', 'NOBLE - BULLS HS', 81.9, 1161.0], ['610304', 'PHOENIX MILITARY HS', 92.9, 545.0], ['609744', 'NORTHSIDE LEARNING HS', 0.0, 220.0], ['609724', 'MATHER HS', 78.5, 1484.0], ['400034', 'CICS - NORTHTOWN HS', 84.4, 918.0], ['609738', 'LINCOLN PARK HS', 90.9, 2105.0], ['609746', 'KENWOOD HS', 86.3, 1862.0], ['610381', 'BRONZEVILLE HS', 75.9, 217.0], ['610380', 'WILLIAMS HS', 87.3, 179.0], ['609712', 'HIRSCH HS', 40.0, 103.0], ['400052', 'NOBLE - COMER', 85.4, 1181.0], ['609734', 'TAFT HS', 87.2, 3414.0], ['400033', 'CICS - LONGWOOD', 73.3, 1281.0], ['609762', 'JULIAN HS', 71.3, 452.0], ['609725', 'MORGAN PARK HS', 82.6, 1238.0], ['610513', 'AIR FORCE HS', 86.7, 197.0], ['609735', 'TILDEN HS', 55.2, 219.0], ['609682', 'RICHARDS HS', 59.5, 226.0], ['400106', 'NOBLE - JOHNSON HS', 77.7, 762.0], ['400086', 'URBAN PREP - ENGLEWOOD HS', 78.7, 259.0], ['610506', 'TEAM HS', 75.9, 1.0], ['609768', 'HOPE HS', 61.9, 22.0], ['609708', 'FOREMAN HS', 64.7, 749.0], ['609729', 'SCHURZ HS', 74.3, 1618.0], ['609766', 'VAUGHN HS', 20.6, 228.0], ['609698', 'BOGAN HS', 71.4, 847.0], ['610524', 'ALCOTT HS', 81.3, 316.0], ['609720', 'LANE TECH HS', 95.5, 4514.0], ['400013', 'ASPIRA - EARLY COLLEGE HS', 79.2, 340.0], ['609694', 'HANCOCK HS', 86.2, 1011.0], ['609741', 'HUBBARD HS', 82.9, 1705.0], ['609709', 'GAGE PARK HS', 62.8, 346.0], ['609728', 'ROOSEVELT HS', 69.7, 954.0], ['609737', 'VON STEUBEN HS', 91.1, 1770.0], ['609749', 'NORTHSIDE PREP HS', 96.6, 1091.0], ['609695', 'AMUNDSEN HS', 76.0, 1285.0], ['400066', 'PERSPECTIVES - MATH & SCI HS', 75.7, 495.0], ['609754', 'CHICAGO MILITARY HS', 89.6, 298.0], ['609727', 'PHILLIPS HS', 63.0, 768.0], ['609751', 'KING HS', 88.5, 513.0], ['400098', 'NOBLE - MUCHIN HS', 94.8, 973.0], ['609733', 'SULLIVAN HS', 66.1, 666.0], ['400035', 'CHICAGO MATH & SCIENCE HS', 85.9, 604.0], ['609740', 'WELLS HS', 75.7, 362.0], ['609759', 'CLEMENTE HS', 81.5, 704.0], ['400022', 'CHIARTS HS', 84.6, 612.0], ['609730', 'SENN HS', 85.8, 1415.0], ['610390', 'RICKOVER MILITARY HS', 88.3, 458.0], ['610389', 'ORR HS', 46.4, 225.0], ['609723', 'MARSHALL HS', 46.1, 265.0], ['610334', 'RABY HS', 67.5, 343.0], ['609693', 'WESTINGHOUSE HS', 93.3, 1203.0], ['609718', 'KENNEDY HS', 73.8, 1600.0], ['610391', 'LINDBLOM HS', 89.3, 1364.0], ['609711', 'HARPER HS', 55.9, 87.0], ['609753', 'CHICAGO AGRICULTURE HS', 83.9, 767.0], ['609760', 'CARVER MILITARY HS', 89.9, 482.0], ['609680', 'PAYTON HS', 98.5, 1153.0], ['609678', 'JONES HS', 98.1, 1918.0], ['609719', 'LAKE VIEW HS', 88.2, 1385.0]]
+
+//create x and y axis
+	xScale.domain([0, d3.max(dataset, function(d){	return d[3]; })]);
+	yScale.domain([0, d3.max(dataset, function(d){  return d[2]; })]); 
+
+
+		svg.selectAll("circle")
+			.data(dataset)
+			.transition()
+			.duration(1000)
+			.on("start", function() {
+					d3.select(this)
+						.attr("fill", "aqua")
+						.attr("r", 3);
+			})
+			.attr("cx", function(d) {
+			// three added because the data point with 1 student appeared to be left of the y axis.
+			//the data point needs to be removed
+									return xScale(d[3])+3;})
+			.attr("cy", function(d) {
+									return yScale(d[2]);})
+			.on("end", function() {
+				d3.select(this)
+					.attr("fill", "black")
+					.attr("r", 3);
+			});
+
+					svg.select(".y.axis")
+					 .transition()
+					 .duration(1000)
+								.call(yAxis);
+		
+					svg.select(".x.axis")
+					 .transition()
+					 .duration(1000)
+								.call(xAxis);
+
+			svg.select(".title")
+				 .text("2017/18 CPS High School Graduation Rates vs. Total Student Count Percentage");
+
+				svg.select(".x.label")
+	 		.text("Total Student Count");
+
+				});
+</script>
+
+
+
