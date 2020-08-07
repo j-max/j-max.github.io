@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Prison Recidivism &middot; J-Max
+    
+  </title>
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+  <link rel="alternate" type="application/atom+xml" title="J-Max" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="container content">
+      <header class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">J-Max</a>
+          <small>coder, writer, problem solver:</small><br>
+          
+          &nbsp;&nbsp;&nbsp;
+          <small><a href="/about">About</a></small>
+          
+          &nbsp;&nbsp;&nbsp;
+          <small><a href="/archive">Archive</a></small>
+          
+          &nbsp;&nbsp;&nbsp;
+          <small><a href="/index.html">Feed</a></small>
+          
+        </h3>
+      </header>
+
+      <main>
+      <article class="post">
+  <h1 class="post-title">Prison Recidivism</h1>
+  <time datetime="2019-02-16T00:00:00-06:00" class="post-date">16 Feb 2019</time>
+  <p>The American prison population is large, to say the least.  If the two million people lived in one city, it would rank as America’s fifth most populous metropolis, just behind Houston.<sup>1</sup>  Each year, approximately 600,000 people, a population approaching that of Portland, are released back into the community.<sup>2</sup>  Recidivism, the term used for ex-offenders who are re-incarcerated after release, is an important factor in understanding how the prison population remains so large. Within three years of their release, two out of three prisoners are rearrested.<sup>3</sup>  My third project for the Metis Data Science Bootcamp, discussed at length below, attempts to use supervised learning algorithms to shed some light on the main factors contributing to recidivism.</p>
+
+<p><img src="images/2-16-19/prison.jpg" alt="Prison Cell" /></p>
+
+<p>For the project, I needed a dataset that included information broken down by offender.  Luckily, the Iowa department of corrections offers a public dataset of over 26,000 records.<sup>4</sup>    The Iowa study tracked released ex-offenders over a three-year period from 2013 until 2018, and includes demographic such as race and age, release type, and several layers of detail about the crime each person was sentenced for.  After dropping records with null values, I had 24,150 rows of data to analyze.  The data was imbalanced: it included a ratio of about one recidivist to two non-recidivist.  It also included a heavy racial imbalance of over 16000 Caucasian prisoners. The latter distribution is not representative of the racial breakdown of general prison population of the US.<sup>5</sup></p>
+
+<p><img src="images/2-16-19/AgeDist.svg" alt="Age Distribution" />
+<img src="images/2-16-19/RaceDist.svg" alt="Racial Distribution" /></p>
+
+<p>Prior to modeling, I broke the dataset down into handpicked subsets.  One of which dropped the “year released”, “reporting year”, and “target population” features. While modeling, this subset consistently outperformed the others.  The best performing models were logistic regression with a C of approximately 1.21, random forest classifier with a max depth of 8, and the naive Bayes Bernoulli classifier.  They all returned an auc_roc score around .65.  I adjusted the threshold to .4 to reduce false negatives, i.e. released persons the model predicted would not be rearrested but were.  False negatives are important since, when considering resource allocation, they represent ex-offenders who may have benefited from more support.</p>
+
+<p>Footnotes<br />
+<sup>1</sup> The official number from the Bureau of Justice Statistics is. 2,131,000 people incarcerated in prison or local jail as of 12/31/16.<br />
+<sup>2</sup> In 2014, the official number of released prisoners was 636,000: https://www.bjs.gov/content/pub/pdf/p14.pdf<br />
+<sup>3</sup> https://www.nij.gov/topics/corrections/recidivism/pages/welcome.aspx<br />
+<sup>4</sup> https://data.iowa.gov/Public-Safety/3-Year-Recidivism-for-Offenders-Released-from-Pris/mw8r-vqy4<br />
+<sup>5</sup> “In 2016, blacks represented 12% of the U.S. adult population but 33% of the sentenced prison population. Whites accounted for 64% of adults but 30% of prisoners. And while Hispanics represented 16% of the adult population, they accounted for 23% of inmates.” (http://www.pewresearch.org/fact-tank/2018/01/12/shrinking-gap-between-number-of-blacks-and-whites-in-prison/)<br /></p>
+
+
+</article>
+
+
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+      <li>
+        <a href="/2019/06/19/CPSGradRatePlots/">
+          CPS 2017-18 CPS High School Graduation Rate vs Student Demographic Plots
+          <small><time datetime="2019-06-19T00:00:00-05:00">19 Jun 2019</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/2019/03/27/ProjectGutenbergRecommender/">
+          Project Gutenberg Book Recommender
+          <small><time datetime="2019-03-27T00:00:00-05:00">27 Mar 2019</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/2019/01/27/CPS/">
+          CPS
+          <small><time datetime="2019-01-27T00:00:00-06:00">27 Jan 2019</time></small>
+        </a>
+      </li>
+    
+  </ul>
+</aside>
+
+
+      </main>
+
+      <footer class="footer">
+        <small>
+          &copy; <time datetime="2019-06-19T15:27:53-05:00">2019</time>. All rights reserved.
+        </small>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>

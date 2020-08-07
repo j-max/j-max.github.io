@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    
+      Project Gutenberg Book Recommender &middot; J-Max
+    
+  </title>
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="/public/favicon.ico">
+  <link rel="alternate" type="application/atom+xml" title="J-Max" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    <div class="container content">
+      <header class="masthead">
+        <h3 class="masthead-title">
+          <a href="/" title="Home">J-Max</a>
+          <small>coder, writer, problem solver:</small><br>
+          
+          &nbsp;&nbsp;&nbsp;
+          <small><a href="/about">About</a></small>
+          
+          &nbsp;&nbsp;&nbsp;
+          <small><a href="/archive">Archive</a></small>
+          
+          &nbsp;&nbsp;&nbsp;
+          <small><a href="/index.html">Feed</a></small>
+          
+        </h3>
+      </header>
+
+      <main>
+      <article class="post">
+  <h1 class="post-title">Project Gutenberg Book Recommender</h1>
+  <time datetime="2019-03-27T00:00:00-05:00" class="post-date">27 Mar 2019</time>
+  <p>The fourth Metis project focused on natural language processing, or NLP for short.  As a subset of data science, it is both incredibly exciting and deceptively frustrating. It’s not hard to explain its allure: transforming words from books or articles into multi-dimensional space is a beautiful idea.  I used <a href="https://www.gutenberg.org/">Project Gutenberg</a> as the data source for my project.  I created a Flask app which takes in a piece of text, then recommends a similar book to read from Project Gutenberg.  Stay with me for a few more paragraphs to learn about the challenges and rewards of the project.</p>
+
+<div class="parallax"></div>
+
+<p>Three important tools for an NLP project are tokenizing, vectorization, and topic modeling.  Tokenizers take a document and break it up into smaller parts: sentences, words, parts of words. Vectorization turns these words into value counts in a new dimension where a single word exists.  I used a tf-idf vectorizer, which transforms a document into vectorized tokens representing the frequency of a word in proportion to its likelihood of appearing in any given document.  After tf-idf vectorization, topic modeling finds similarities between these frequencies, and winnows down the number of dimensions to a number of topics. The larger concept is known as dimensionality reduction.</p>
+
+<p>Hopefully the flow of the last paragraph communicated both the beauty and frustration I alluded to at the beginning.  Imagining words floating around in a spatial representation of their frequency is awesome.  And the algorithms which I implemented to reduce these frequencies to topic patterns work surprisingly well.  While analyzing the set of the Top 100 ebooks downloaded on Project Gutenberg on a given day, the algorithms spit out pretty concise topics. If I set sklearn’s NMF modeler to 7 topics, it yielded the following self-labeled categories: seafaring adventure, slavery/race, city life, law/philosophy, family, manners, and terrestrial/space exploration.  These labels were subjectively defined by me, yet it is hard to  look at the groups and not see intriguing patterns. Here is an example of first five words relating to seafaring: ship, sea, captain, boat, island. Here are the first five for law/philosophy: power, opinion, nature, subject, law. The NMF modeler and its kin are kind of magical.</p>
+
+<div class="magical"></div>
+
+<p>The major frustration comes in tandem with the magic.  It is difficult to visualize how dimensionality reduction works.  I found myself imagining the word frequencies in three dimensional space. This is a fine place to start, but making the leap from three dimensions to a dimension per word is a harder leap.  There is no visual equivalent.  The frustration entered when the initial awe of mapping a text into multiple dimensions gave way to the recognition that I couldn’t visually imagine what the algorithms were doing. The way to understand them is via linear algebra calculations, which are beautiful in their own way, but not as alluring as points floating in space.</p>
+
+<p>As is often the case in data science, beauty and frustration give way to whether the end-product works.  The flask app performs fairly well.  It makes interesting predictions, and points the user in a good direction.  The app is not live yet. Until it is, check out my code on <a href="https://github.com/j-max/gutenberg_recommender">Github</a>.</p>
+
+
+</article>
+
+
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+      <li>
+        <a href="/2019/06/19/CPSGradRatePlots/">
+          CPS 2017-18 CPS High School Graduation Rate vs Student Demographic Plots
+          <small><time datetime="2019-06-19T00:00:00-05:00">19 Jun 2019</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/2019/02/16/PrisonRecidivism/">
+          Prison Recidivism
+          <small><time datetime="2019-02-16T00:00:00-06:00">16 Feb 2019</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/2019/01/27/CPS/">
+          CPS
+          <small><time datetime="2019-01-27T00:00:00-06:00">27 Jan 2019</time></small>
+        </a>
+      </li>
+    
+  </ul>
+</aside>
+
+
+      </main>
+
+      <footer class="footer">
+        <small>
+          &copy; <time datetime="2019-06-19T15:27:53-05:00">2019</time>. All rights reserved.
+        </small>
+      </footer>
+    </div>
+
+    
+  </body>
+</html>
