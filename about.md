@@ -4,7 +4,7 @@ title: About
 ---
 
 <p class="message">
-  Welcome! Happy reading. 
+  Welcome! Happy reading. I hope you enjoy the posts. 
 </p>
 
 
