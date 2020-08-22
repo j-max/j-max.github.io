@@ -9,4 +9,4 @@ I will follow the convention Andrew Ng uses in this Coursera lesson [Logistic Re
 
 The loss function measures how well you are doing on a **single training example**.  
 
-The cost funciton measures how well you are doing on the **entire training set**.  
+The cost function measures how well you are doing on the **entire training set**.  
