@@ -1,0 +1,21 @@
+I"<p>What does Git stand for?</p>
+
+<p>Wikipedia states:</p>
+
+<p>Torvalds quipped about the name git (which means unpleasant person in British English slang): “I’m an egotistical bastard, and I name all my projects after myself. First ‘Linux’, now ‘git’.”</p>
+
+<p>Wikipedia continues in citing the man page, which presents four alternate etymologies:</p>
+
+<ol>
+  <li>random three-letter combination that is pronounceable, and not
+   actually used by any common UNIX command.  The fact that it is a
+   mispronunciation of “get” may or may not be relevant.</li>
+  <li>stupid. contemptible and despicable. simple. Take your pick from the
+   dictionary of slang.</li>
+  <li>“global information tracker”: you’re in a good mood, and it actually
+   works for you. Angels sing, and a light suddenly fills the room.</li>
+  <li>“goddamn idiotic truckload of sh*t”: when it breaks.</li>
+</ol>
+
+<p>In the midst of the first Metis project, I’m convinced its origin resides in the phrase,  “Git used to it.”</p>
+:ET

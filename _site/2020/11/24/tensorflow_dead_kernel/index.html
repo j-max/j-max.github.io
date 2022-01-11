@@ -7,7 +7,7 @@
 
   <title>
     
-      MVP &middot; J-Max
+      Tensorflow Dead Kernel &middot; J-Max
     
   </title>
 
@@ -43,14 +43,9 @@
 
       <main>
       <article class="post">
-  <h1 class="post-title">MVP</h1>
-  <time datetime="2019-01-13T00:00:00-06:00" class="post-date">13 Jan 2019</time>
-  <p>The first week of Metis has presented several challenges.  The first and largest, technical acclimation, one would expect. Less obvious is a challenge associated with the MVP: Minimum Viable Product.  The MVP is, essentially, the bar of acceptability for a given project.  While it is not as fun to define an MVP as it is to start wrangling datasets with code, it is a useful tool in the battle against misuse of energy.</p>
-
-<p>Energy misuse is an obstacle which often complicates the completion of coding projects.  The allure of problem solving which draws many, myself included, to the command line, also sets a trap.  An hour can pass fiddling with an interesting script. While this may be time well spent in less structured circumstances, with a project deadline, such a detour proves costly.   A thoughtful MVP helps one maintain focus. It makes it easier to recognize effort which furthers one’s goals, and effort whose utility is marginal or overly complicated.</p>
-
-<p>An MVP is similar to a research paper’s thesis statement. I would expect that like the craft of thesis writing, that of solid MVP making is a skill hard won.  The trick is defining one which is both feasible and exciting.</p>
-
+  <h1 class="post-title">Tensorflow Dead Kernel</h1>
+  <time datetime="2020-11-24T00:00:00-06:00" class="post-date">24 Nov 2020</time>
+  <p>I recently had a frustrating experience trying to debug a Tensorflow error in a Jupyter Notebook.  After building the model architecture and compiling it, running fit_generator crashed the kernel with no output.  After going down many dead end paths, the solution turned out to be updating Numpy: <code class="highlighter-rouge">pip install -U numpy</code>.  Thanks to this <a href="https://github.com/tensorflow/tensorflow/issues/9829">thread</a> for the solution.</p>
 
 </article>
 
@@ -58,13 +53,6 @@
 <aside class="related">
   <h3>Related posts</h3>
   <ul class="related-posts">
-    
-      <li>
-        <a href="/2020/11/24/tensorflow_dead_kernel/">
-          Tensorflow Dead Kernel
-          <small><time datetime="2020-11-24T00:00:00-06:00">24 Nov 2020</time></small>
-        </a>
-      </li>
     
       <li>
         <a href="/2020/08/22/py_imports/">
@@ -77,6 +65,13 @@
         <a href="/2020/08/13/costvloss/">
           Cost versus Loss
           <small><time datetime="2020-08-13T00:00:00-05:00">13 Aug 2020</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/2020/08/07/psqlfix/">
+          Postgresql Fix
+          <small><time datetime="2020-08-07T00:00:00-05:00">07 Aug 2020</time></small>
         </a>
       </li>
     

@@ -7,7 +7,7 @@
 
   <title>
     
-      J-Max &middot; coder, writer, problem solver
+      Python Imports &middot; J-Max
     
   </title>
 
@@ -42,31 +42,10 @@
       </header>
 
       <main>
-      <div class="posts">
-  
-  <article class="post">
-    <h1 class="post-title">
-      <a href="/2020/11/24/tensorflow_dead_kernel/">
-        Tensorflow Dead Kernel
-      </a>
-    </h1>
-
-    <time datetime="2020-11-24T00:00:00-06:00" class="post-date">24 Nov 2020</time>
-
-    <p>I recently had a frustrating experience trying to debug a Tensorflow error in a Jupyter Notebook.  After building the model architecture and compiling it, running fit_generator crashed the kernel with no output.  After going down many dead end paths, the solution turned out to be updating Numpy: <code class="highlighter-rouge">pip install -U numpy</code>.  Thanks to this <a href="https://github.com/tensorflow/tensorflow/issues/9829">thread</a> for the solution.</p>
-
-  </article>
-  
-  <article class="post">
-    <h1 class="post-title">
-      <a href="/2020/08/22/py_imports/">
-        Python Imports
-      </a>
-    </h1>
-
-    <time datetime="2020-08-22T00:00:00-05:00" class="post-date">22 Aug 2020</time>
-
-    <p>I currently use Spacemacs as a development environment.  I open a .py file, then <code class="highlighter-rouge">run-python</code> to startup an interactive shell.  In Spacemacs, the shell’s pwd is assigned to where <code class="highlighter-rouge">run-python</code> was executed. So, if it was executed in the .py file, the pwd would be the files subdirectory, rather than the projects root.</p>
+      <article class="post">
+  <h1 class="post-title">Python Imports</h1>
+  <time datetime="2020-08-22T00:00:00-05:00" class="post-date">22 Aug 2020</time>
+  <p>I currently use Spacemacs as a development environment.  I open a .py file, then <code class="highlighter-rouge">run-python</code> to startup an interactive shell.  In Spacemacs, the shell’s pwd is assigned to where <code class="highlighter-rouge">run-python</code> was executed. So, if it was executed in the .py file, the pwd would be the files subdirectory, rather than the projects root.</p>
 
 <p>With data science development, csvs live in a data folder accessible from the top level of the directory.  <code class="highlighter-rouge">project_directory/data</code>. If the Python file I am using is in <code class="highlighter-rouge">project/src</code>, if I wanted to read in a csv from the data folder I would use the relative path <code class="highlighter-rouge">pd.read_csv('../data/target_csv')</code>. This will only work if the interpreter’s pwd is the src directory.</p>
 
@@ -84,18 +63,37 @@
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">root</span><span class="o">+</span><span class="s">'project_directory/data/target.csv'</span><span class="p">)</span>
 </code></pre></div></div>
 
-  </article>
-  
-</div>
+</article>
 
-<div class="pagination">
-  
-    <a class="pagination-item older" href="/page2">Older</a>
-  
-  
-    <span class="pagination-item newer">Newer</span>
-  
-</div>
+
+<aside class="related">
+  <h3>Related posts</h3>
+  <ul class="related-posts">
+    
+      <li>
+        <a href="/2020/11/24/tensorflow_dead_kernel/">
+          Tensorflow Dead Kernel
+          <small><time datetime="2020-11-24T00:00:00-06:00">24 Nov 2020</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/2020/08/13/costvloss/">
+          Cost versus Loss
+          <small><time datetime="2020-08-13T00:00:00-05:00">13 Aug 2020</time></small>
+        </a>
+      </li>
+    
+      <li>
+        <a href="/2020/08/07/psqlfix/">
+          Postgresql Fix
+          <small><time datetime="2020-08-07T00:00:00-05:00">07 Aug 2020</time></small>
+        </a>
+      </li>
+    
+  </ul>
+</aside>
+
 
       </main>
 
